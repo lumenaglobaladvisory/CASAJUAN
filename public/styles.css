@@ -1,0 +1,533 @@
+/* ==========================================================================
+   Casa Juan — Quiet Luxury Brand Kit
+   ========================================================================== */
+
+:root {
+  --midnight-black: #111111;
+  --ivory: #F7F3EC;
+  --champagne-gold: #B99A56;
+  --royal-navy: #183A6D;
+  --brushed-brass: #8F7742;
+  --marble-gray: #D7D5D2;
+
+  --font-display: 'Cormorant Garamond', serif;
+  --font-body: 'DM Sans', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--midnight-black);
+  color: var(--ivory);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+.rule {
+  height: 1px;
+  background: var(--champagne-gold);
+  width: 120px;
+  margin: 0 auto;
+}
+
+.rule--full {
+  width: 100%;
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+
+.btn {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 16px 32px;
+  min-height: 48px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: opacity 0.2s ease, background 0.2s ease;
+}
+
+.btn--gold {
+  background: var(--champagne-gold);
+  color: var(--midnight-black);
+  border-color: var(--champagne-gold);
+}
+
+.btn--gold:hover {
+  opacity: 0.85;
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--ivory);
+  border-color: var(--ivory);
+}
+
+.btn--ghost:hover {
+  background: rgba(247, 243, 236, 0.08);
+}
+
+.btn--black {
+  background: var(--midnight-black);
+  color: var(--ivory);
+  border-color: var(--midnight-black);
+  width: 100%;
+}
+
+.btn--black:hover {
+  opacity: 0.88;
+}
+
+/* ==========================================================================
+   Age Gate
+   ========================================================================== */
+
+.age-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: var(--midnight-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.age-gate[hidden] {
+  display: none;
+}
+
+.age-gate__content {
+  text-align: center;
+  max-width: 420px;
+}
+
+.age-gate__wordmark {
+  font-family: var(--font-display);
+  color: var(--champagne-gold);
+  font-size: clamp(2.2rem, 8vw, 3rem);
+  letter-spacing: 0.12em;
+  font-weight: 500;
+  margin-bottom: 24px;
+}
+
+.age-gate__line {
+  font-family: var(--font-body);
+  color: var(--ivory);
+  font-size: 0.95rem;
+  margin-bottom: 36px;
+}
+
+.age-gate__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: stretch;
+}
+
+.age-gate__actions .btn {
+  width: 100%;
+}
+
+main[aria-hidden="true"] {
+  display: none;
+}
+
+/* ==========================================================================
+   Hero
+   ========================================================================== */
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--midnight-black);
+  overflow: hidden;
+  padding: 48px 24px;
+}
+
+.hero__texture {
+  position: absolute;
+  inset: 0;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 640px;
+}
+
+.hero__wordmark {
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: var(--ivory);
+  font-size: clamp(2.6rem, 8vw, 4.5rem);
+  letter-spacing: 0.14em;
+}
+
+.hero__inner .rule {
+  margin-top: 24px;
+}
+
+.hero__subline {
+  margin-top: 18px;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--marble-gray);
+}
+
+.hero__can {
+  margin: 40px 0 20px;
+  width: min(220px, 40vw);
+  filter: drop-shadow(0 30px 60px rgba(185, 154, 86, 0.12));
+}
+
+.hero__flavor {
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--champagne-gold);
+}
+
+.hero__tagline {
+  margin-top: 36px;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--ivory);
+  font-size: clamp(1.15rem, 3vw, 1.5rem);
+}
+
+.scroll-indicator {
+  margin-top: 44px;
+  height: 44px;
+  width: 1px;
+  overflow: hidden;
+  position: relative;
+}
+
+.scroll-indicator span {
+  position: absolute;
+  top: -44px;
+  left: 0;
+  width: 1px;
+  height: 44px;
+  background: var(--champagne-gold);
+  animation: scroll-down 2.2s ease-in-out infinite;
+}
+
+@keyframes scroll-down {
+  0% { top: -44px; }
+  60% { top: 44px; }
+  100% { top: 44px; }
+}
+
+/* ==========================================================================
+   Email Capture
+   ========================================================================== */
+
+.capture {
+  background: var(--ivory);
+  color: var(--midnight-black);
+  padding: 96px 24px;
+}
+
+.capture__inner {
+  max-width: 480px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.capture__headline {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(2rem, 6vw, 2.75rem);
+  color: var(--midnight-black);
+}
+
+.capture__body {
+  margin-top: 18px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: #4a4a4a;
+  line-height: 1.6;
+}
+
+.form {
+  margin-top: 44px;
+  text-align: left;
+}
+
+.form__row {
+  margin-bottom: 20px;
+}
+
+.form__label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #55524b;
+  margin-bottom: 8px;
+}
+
+.form__input {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 14px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  background: var(--ivory);
+  border: 1px solid var(--marble-gray);
+  border-radius: 0;
+  color: var(--midnight-black);
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.form__input:focus {
+  outline: none;
+  border-color: var(--midnight-black);
+}
+
+.form__select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23111111' stroke-width='1.4' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+}
+
+.form__submit {
+  margin-top: 12px;
+}
+
+.form__disclaimer {
+  margin-top: 16px;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--marble-gray);
+  filter: brightness(0.6);
+}
+
+.form__error {
+  margin-top: 14px;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: #a33b2f;
+}
+
+.form__success {
+  margin-top: 44px;
+  text-align: center;
+}
+
+.form__success p {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.3rem, 4vw, 1.7rem);
+  color: var(--midnight-black);
+}
+
+/* ==========================================================================
+   Brand Philosophy Strip
+   ========================================================================== */
+
+.philosophy {
+  background: var(--midnight-black);
+  padding: 64px 24px;
+}
+
+.philosophy__inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  text-align: center;
+  padding: 56px 0;
+}
+
+.philosophy__label {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--champagne-gold);
+  margin-bottom: 14px;
+}
+
+.philosophy__body {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  color: var(--ivory);
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   Momentum / Social Proof
+   ========================================================================== */
+
+.momentum {
+  background: var(--midnight-black);
+  padding: 96px 24px;
+  text-align: center;
+}
+
+.momentum__stat {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(3rem, 10vw, 5rem);
+  color: var(--champagne-gold);
+  line-height: 1;
+}
+
+.momentum__label {
+  margin-top: 10px;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--ivory);
+}
+
+.momentum__follow {
+  margin-top: 28px;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--marble-gray);
+}
+
+.momentum__follow a {
+  text-decoration: none;
+  border-bottom: 1px solid var(--marble-gray);
+  padding-bottom: 1px;
+}
+
+.momentum__follow a:hover {
+  border-color: var(--champagne-gold);
+  color: var(--champagne-gold);
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.site-footer {
+  background: var(--midnight-black);
+  padding: 56px 24px 40px;
+  text-align: center;
+}
+
+.site-footer__wordmark {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  color: var(--champagne-gold);
+  font-size: 1.1rem;
+}
+
+.site-footer__line {
+  margin-top: 10px;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  color: var(--marble-gray);
+}
+
+.site-footer .rule {
+  margin: 24px auto;
+}
+
+.site-footer__social {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  color: var(--champagne-gold);
+  margin-bottom: 28px;
+}
+
+.site-footer__social a {
+  display: inline-flex;
+}
+
+.site-footer__legal {
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  color: var(--marble-gray);
+  opacity: 0.7;
+  max-width: 420px;
+  margin: 0 auto 10px;
+  line-height: 1.5;
+}
+
+.site-footer__privacy a {
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  color: var(--marble-gray);
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media (max-width: 480px) {
+  .philosophy__inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 32px 0;
+  }
+
+  .capture {
+    padding: 72px 20px;
+  }
+
+  .hero {
+    padding: 40px 20px;
+  }
+}
+
+@media (min-width: 640px) {
+  .age-gate__actions {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .age-gate__actions .btn {
+    width: auto;
+  }
+}

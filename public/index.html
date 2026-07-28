@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#111111">
+<title>Casa Juan — Where Every Drink Begins a Story</title>
+<meta name="description" content="Casa Juan is a quiet luxury hospitality and cocktail brand from Fort Lauderdale, FL. Be the first to know when we launch.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="assets/logo.png">
+</head>
+<body>
+
+<!-- AGE GATE -->
+<div id="age-gate" class="age-gate" aria-modal="true" role="dialog" aria-labelledby="age-gate-heading">
+  <div class="age-gate__content">
+    <p id="age-gate-heading" class="age-gate__wordmark">CASA JUAN</p>
+    <p class="age-gate__line">You must be 21 or older to enter.</p>
+    <div class="age-gate__actions">
+      <button id="age-gate-enter" class="btn btn--gold" type="button">I am 21 or older</button>
+      <button id="age-gate-exit" class="btn btn--ghost" type="button">Exit</button>
+    </div>
+  </div>
+</div>
+
+<main id="site" aria-hidden="true">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero__texture" aria-hidden="true"></div>
+    <div class="hero__inner">
+      <h1 class="hero__wordmark">CASA JUAN</h1>
+      <div class="rule rule--gold" aria-hidden="true"></div>
+      <p class="hero__subline">Fort Lauderdale &middot; EST. 2023</p>
+
+      <div class="hero__can">
+        <img src="assets/can-mockup.png" alt="Casa Juan Mango Passion Fruit Vodka Cocktail can" width="500" height="1100">
+      </div>
+      <p class="hero__flavor">Mango Passion Fruit Vodka Cocktail</p>
+
+      <p class="hero__tagline">Where Every Drink Begins a Story.</p>
+
+      <div class="scroll-indicator" aria-hidden="true"><span></span></div>
+    </div>
+  </section>
+
+  <!-- EMAIL CAPTURE -->
+  <section class="capture" id="join">
+    <div class="capture__inner">
+      <h2 class="capture__headline">Be the First Inside.</h2>
+      <p class="capture__body">Casa Juan is coming to Fort Lauderdale and beyond. Leave your details and you will hear from us before anyone else.</p>
+
+      <form id="signup-form" class="form" novalidate>
+        <div class="form__row">
+          <label class="form__label" for="first_name">First Name</label>
+          <input class="form__input" type="text" id="first_name" name="first_name" autocomplete="given-name" required>
+        </div>
+
+        <div class="form__row">
+          <label class="form__label" for="email">Email Address</label>
+          <input class="form__input" type="email" id="email" name="email" autocomplete="email" required>
+        </div>
+
+        <div class="form__row">
+          <label class="form__label" for="phone">Text me when it drops</label>
+          <input class="form__input" type="tel" id="phone" name="phone" autocomplete="tel">
+        </div>
+
+        <div class="form__row">
+          <label class="form__label" for="zip_code">Your Area</label>
+          <input class="form__input" type="text" id="zip_code" name="zip_code" autocomplete="postal-code">
+        </div>
+
+        <div class="form__row">
+          <label class="form__label" for="referral_source">How did you hear about us?</label>
+          <select class="form__input form__select" id="referral_source" name="referral_source">
+            <option value="">Select one</option>
+            <option value="instagram">Instagram</option>
+            <option value="tiktok">TikTok</option>
+            <option value="referral">A Friend</option>
+            <option value="mobile_bar">Mobile Bar Event</option>
+            <option value="organic">Other</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn--black form__submit">Join the List</button>
+        <p class="form__disclaimer">No spam. Your information stays with us.</p>
+        <p class="form__error" id="form-error" role="alert" hidden></p>
+      </form>
+
+      <div class="form__success" id="form-success" hidden>
+        <p>You are on the list. Casa Juan will be in touch.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BRAND PHILOSOPHY STRIP -->
+  <section class="philosophy">
+    <div class="rule rule--gold rule--full" aria-hidden="true"></div>
+    <div class="philosophy__inner">
+      <div class="philosophy__col">
+        <p class="philosophy__label">The Experience</p>
+        <p class="philosophy__body">Every event, every pour, every detail considered.</p>
+      </div>
+      <div class="philosophy__col">
+        <p class="philosophy__label">The Product</p>
+        <p class="philosophy__body">Real vodka. Real fruit. Built for people who notice the difference.</p>
+      </div>
+      <div class="philosophy__col">
+        <p class="philosophy__label">The Place</p>
+        <p class="philosophy__body">Fort Lauderdale first. Everywhere next.</p>
+      </div>
+    </div>
+    <div class="rule rule--gold rule--full" aria-hidden="true"></div>
+  </section>
+
+  <!-- MOMENTUM / SOCIAL PROOF -->
+  <section class="momentum">
+    <p class="momentum__stat"><span id="subscriber-count">&mdash;</span></p>
+    <p class="momentum__label">people already waiting</p>
+    <p class="momentum__follow">
+      Follow the journey &middot;
+      <a href="https://instagram.com/casajuan" target="_blank" rel="noopener">Instagram</a>
+      &middot;
+      <a href="https://tiktok.com/@casajuan" target="_blank" rel="noopener">TikTok</a>
+    </p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <p class="site-footer__wordmark">CASA JUAN</p>
+    <p class="site-footer__line">Fort Lauderdale, FL &middot; Est. 2023</p>
+    <div class="rule rule--gold" aria-hidden="true"></div>
+    <div class="site-footer__social">
+      <a href="https://instagram.com/casajuan" target="_blank" rel="noopener" aria-label="Casa Juan on Instagram">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a href="https://tiktok.com/@casajuan" target="_blank" rel="noopener" aria-label="Casa Juan on TikTok">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 3v10.5a3.5 3.5 0 1 1-3-3.46"/><path d="M14 3a5.5 5.5 0 0 0 5 5.4"/></svg>
+      </a>
+    </div>
+    <p class="site-footer__legal">Must be 21 or older to purchase alcohol. Please drink responsibly.</p>
+    <p class="site-footer__privacy"><a href="/privacy">Privacy Policy</a></p>
+  </footer>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>

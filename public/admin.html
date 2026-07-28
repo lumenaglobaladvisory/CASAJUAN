@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#111111">
+<meta name="robots" content="noindex, nofollow">
+<title>Casa Juan — Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<div id="login-view" class="login">
+  <div class="login__card">
+    <p class="login__wordmark">CASA JUAN</p>
+    <p class="login__sub">Admin</p>
+    <form id="login-form">
+      <input type="password" id="login-password" placeholder="Password" autocomplete="current-password" required>
+      <button type="submit" class="btn btn--gold">Sign In</button>
+      <p class="login__error" id="login-error" hidden></p>
+    </form>
+  </div>
+</div>
+
+<div id="dashboard-view" class="dashboard" hidden>
+  <header class="dashboard__header">
+    <p class="dashboard__wordmark">CASA JUAN <span>Admin</span></p>
+    <button id="logout-btn" class="btn btn--ghost">Sign Out</button>
+  </header>
+
+  <section class="stat-row">
+    <div class="stat-card">
+      <p class="stat-card__value" id="stat-total">&mdash;</p>
+      <p class="stat-card__label">Total Subscribers</p>
+    </div>
+  </section>
+
+  <section class="toolbar">
+    <input type="search" id="search-input" placeholder="Search by name or email">
+    <select id="tag-filter">
+      <option value="">All sources</option>
+      <option value="instagram">Instagram</option>
+      <option value="tiktok">TikTok</option>
+      <option value="referral">A Friend</option>
+      <option value="mobile_bar">Mobile Bar Event</option>
+      <option value="organic">Other</option>
+    </select>
+    <a id="export-btn" class="btn btn--black" href="/api/admin/export">Export CSV</a>
+  </section>
+
+  <section class="table-wrap">
+    <table id="subscribers-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Area</th>
+          <th>Source</th>
+          <th>Date</th>
+          <th>Tags</th>
+        </tr>
+      </thead>
+      <tbody id="subscribers-body"></tbody>
+    </table>
+    <p id="table-empty" class="table-empty" hidden>No subscribers found.</p>
+  </section>
+
+  <section class="campaign">
+    <h2>Send Campaign</h2>
+    <form id="campaign-form">
+      <label for="campaign-subject">Subject</label>
+      <input type="text" id="campaign-subject" required>
+      <label for="campaign-body">Body (HTML)</label>
+      <textarea id="campaign-body" rows="8" required></textarea>
+      <button type="submit" class="btn btn--gold">Send to All Subscribers</button>
+    </form>
+  </section>
+</div>
+
+<div id="confirm-modal" class="modal" hidden>
+  <div class="modal__card">
+    <p id="modal-message"></p>
+    <div class="modal__actions">
+      <button id="modal-cancel" class="btn btn--ghost">Cancel</button>
+      <button id="modal-confirm" class="btn btn--gold">Confirm Send</button>
+    </div>
+  </div>
+</div>
+
+<script src="admin.js"></script>
+</body>
+</html>
