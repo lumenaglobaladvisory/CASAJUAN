@@ -10,8 +10,8 @@ const resend = resendApiKey ? new Resend(resendApiKey) : null;
 
 const FROM_ADDRESS = 'Casa Juan <hello@casajuan.com>';
 
-const INSTAGRAM_URL = 'https://instagram.com/casajuan';
-const TIKTOK_URL = 'https://tiktok.com/@casajuan';
+const INSTAGRAM_URL = 'https://instagram.com/casajuanexperience';
+const TIKTOK_URL = 'https://tiktok.com/@casajuanexperience';
 
 function welcomeEmailText(firstName) {
   return [
