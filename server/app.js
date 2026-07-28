@@ -1,0 +1,27 @@
+require('dotenv').config();
+
+const express = require('express');
+const path = require('path');
+
+const subscribeRoutes = require('./routes/subscribe');
+const adminRoutes = require('./routes/admin');
+
+const app = express();
+
+app.disable('x-powered-by');
+app.use(express.json());
+
+app.use('/api/admin', adminRoutes);
+app.use('/api', subscribeRoutes);
+
+app.use(express.static(path.join(__dirname, '..', 'public')));
+
+app.get('/admin', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'admin.html'));
+});
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
+});
+
+module.exports = app;

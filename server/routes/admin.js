@@ -2,11 +2,7 @@ const express = require('express');
 const router = express.Router();
 const supabase = require('../services/supabase');
 const { sendCampaign } = require('../services/email');
-
-function requireAdminSession(req, res, next) {
-  if (req.session && req.session.isAdmin) return next();
-  return res.status(401).json({ success: false, message: 'Not authenticated.' });
-}
+const { requireAdmin, isAuthenticated, loginCookie, logoutCookie } = require('../services/adminAuth');
 
 function toCsv(rows) {
   const header = ['first_name', 'email', 'phone', 'zip_code', 'referral_source', 'subscribed_at', 'tags'];
@@ -25,25 +21,28 @@ function toCsv(rows) {
 }
 
 // --- Auth ---
+// Stateless: the session is a signed cookie (HMAC'd with ADMIN_PASSWORD), not
+// server-side session storage, so it works across serverless invocations.
 router.post('/login', (req, res) => {
   const { password } = req.body || {};
   if (!password || password !== process.env.ADMIN_PASSWORD) {
     return res.status(401).json({ success: false, message: 'Incorrect password.' });
   }
-  req.session.isAdmin = true;
+  res.setHeader('Set-Cookie', loginCookie());
   return res.json({ success: true });
 });
 
 router.post('/logout', (req, res) => {
-  req.session.destroy(() => res.json({ success: true }));
+  res.setHeader('Set-Cookie', logoutCookie());
+  res.json({ success: true });
 });
 
 router.get('/session', (req, res) => {
-  res.json({ authenticated: !!(req.session && req.session.isAdmin) });
+  res.json({ authenticated: isAuthenticated(req) });
 });
 
 // --- Subscribers ---
-router.get('/subscribers', requireAdminSession, async (req, res) => {
+router.get('/subscribers', requireAdmin, async (req, res) => {
   try {
     const { search, tag } = req.query;
     let query = supabase.from('subscribers').select('*').order('subscribed_at', { ascending: false });
@@ -67,7 +66,7 @@ router.get('/subscribers', requireAdminSession, async (req, res) => {
   }
 });
 
-router.get('/export', requireAdminSession, async (req, res) => {
+router.get('/export', requireAdmin, async (req, res) => {
   try {
     const { data, error } = await supabase.from('subscribers').select('*').order('subscribed_at', { ascending: false });
     if (error) {
@@ -104,7 +103,7 @@ router.post('/export', async (req, res) => {
 });
 
 // --- Campaigns ---
-router.post('/campaigns/send', requireAdminSession, async (req, res) => {
+router.post('/campaigns/send', requireAdmin, async (req, res) => {
   try {
     const { subject, body_html } = req.body || {};
     if (!subject || !body_html) {

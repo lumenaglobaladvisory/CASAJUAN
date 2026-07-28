@@ -11,7 +11,10 @@ Built to the Casa Juan Quiet Luxury Brand Kit v1.0.
 - **Frontend** (`public/`): static HTML/CSS/vanilla JS. Age gate → hero → email
   capture → brand philosophy strip → live subscriber count → footer.
 - **Backend** (`server/`): Node.js + Express API for subscribing, counting,
-  event tracking, and the admin dashboard.
+  event tracking, and the admin dashboard. `server/app.js` exports the Express
+  app itself (no `listen()` call) so it can run either as a normal Node
+  process (`server/index.js`, for local dev) or as a Vercel serverless
+  function (`api/index.js`).
 - **Database**: Supabase (Postgres) — `subscribers`, `campaigns`, `events` tables.
 - **Email**: Resend — welcome email on signup, campaign sends from the admin
   dashboard.
@@ -73,28 +76,33 @@ npm run dev
 - `POST /api/admin/export` — full subscriber list as JSON, protected by the
   `x-admin-key` header (must match `ADMIN_API_KEY`).
 - Admin dashboard endpoints (`/api/admin/login`, `/subscribers`,
-  `/export` (CSV), `/campaigns/send`) are protected by a session cookie set
-  after logging in with `ADMIN_PASSWORD` at `/admin`.
+  `/export` (CSV), `/campaigns/send`) are protected by a signed cookie set
+  after logging in with `ADMIN_PASSWORD` at `/admin`. The cookie is a
+  stateless HMAC token (see `server/services/adminAuth.js`), not a
+  server-side session, so auth works correctly across Vercel's serverless
+  invocations.
 
-## Deploying to Railway
+## Deploying to Vercel
 
-1. Push this repository to GitHub (or connect it directly) and create a new
-   Railway project from it. `railway.json` is already configured to run
-   `node server/index.js` with Nixpacks.
-2. In the Railway project's **Variables** tab, add every variable from
-   `.env.example` with your real values, and set `NODE_ENV=production`.
-3. Deploy. Railway will install dependencies and start the server
-   automatically.
-4. Confirm the site loads at the generated `*.up.railway.app` domain before
-   connecting a custom domain.
+1. Push this repository to GitHub and import it as a new project in Vercel
+   (or run `vercel` from the CLI in this directory). No build step is
+   needed — Vercel serves `public/` as static files and runs `api/index.js`
+   (the Express app) as a serverless function. `vercel.json` rewrites
+   `/api/*` to that function and `/admin` to `public/admin.html`.
+2. In the Vercel project's **Settings → Environment Variables**, add every
+   variable from `.env.example` with your real values, and set
+   `NODE_ENV=production`.
+3. Deploy. Confirm the site loads at the generated `*.vercel.app` domain
+   before connecting a custom domain.
 
 ## Connecting a Custom Domain
 
-1. In the Railway project, go to the service's **Settings → Networking →
-   Custom Domain** and add your domain (e.g. `casajuan.com`).
-2. Railway will show a CNAME (or A/ALIAS) record to add at your DNS
-   provider. Add that record and wait for propagation/SSL provisioning.
-3. Once verified, Railway serves the app on your domain over HTTPS
+1. In the Vercel project, go to **Settings → Domains** and add your domain
+   (e.g. `casajuan.com`).
+2. Vercel will show the DNS records to add (usually an `A` record for the
+   apex domain and/or a `CNAME` for `www`) at your DNS provider. Add them
+   and wait for propagation.
+3. Once verified, Vercel serves the app on your domain over HTTPS
    automatically.
 
 ## Sending a Campaign to All Subscribers
