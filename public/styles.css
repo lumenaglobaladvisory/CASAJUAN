@@ -151,8 +151,12 @@ a {
   width: 100%;
 }
 
-main[aria-hidden="true"] {
-  display: none;
+/* Content stays in the DOM (and visible to crawlers) even while the age
+   gate is open - the fixed, opaque overlay covers it visually and
+   aria-hidden keeps it out of the accessibility tree for screen readers,
+   but nothing here should ever set display:none on main. */
+body.age-gate-open {
+  overflow: hidden;
 }
 
 /* ==========================================================================

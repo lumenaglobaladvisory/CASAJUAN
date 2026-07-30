@@ -45,6 +45,7 @@
   function revealSite() {
     ageGate.hidden = true;
     site.removeAttribute('aria-hidden');
+    document.body.classList.remove('age-gate-open');
     logEvent('page_load');
   }
 
@@ -52,6 +53,7 @@
     revealSite();
   } else {
     ageGate.hidden = false;
+    document.body.classList.add('age-gate-open');
   }
 
   document.getElementById('age-gate-enter').addEventListener('click', function () {
