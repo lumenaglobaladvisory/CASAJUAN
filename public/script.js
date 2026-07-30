@@ -51,15 +51,81 @@
   }
 
   function triggerCanReveal() {
+    var canEl = document.querySelector('.hero__can');
     var revealMask = document.querySelector('.hero__can-reveal');
-    if (!revealMask) return;
-    // brief delay so the reveal feels sequential after the gate closes,
-    // rather than racing it
-    window.requestAnimationFrame(function () {
-      setTimeout(function () {
-        revealMask.classList.add('hero__can-reveal--active');
-      }, 150);
-    });
+    if (!canEl || !revealMask) return;
+
+    var reduceMotion = window.matchMedia &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) return; // leave overlay at its default opacity:0
+
+    var rect = canEl.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
+
+    var spotRadius = Math.min(rect.width, rect.height) * 0.3;
+    var feather = Math.max(18, spotRadius * 0.35);
+    var maxRadius = Math.sqrt(rect.width * rect.width + rect.height * rect.height);
+
+    // a searchlight wandering across the can before settling and expanding -
+    // points as % position within the can's own box
+    var waypoints = [
+      { x: 36, y: 16 },
+      { x: 70, y: 24 },
+      { x: 74, y: 58 },
+      { x: 30, y: 64 },
+      { x: 50, y: 40 }
+    ];
+
+    var sweepDuration = 1500;
+    var expandDuration = 750;
+    var totalDuration = sweepDuration + expandDuration;
+    var startTime = null;
+
+    function easeInOut(t) {
+      return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+    }
+
+    function setSpot(xPct, yPct, radiusPx) {
+      var inner = Math.max(0, radiusPx - feather);
+      var outer = radiusPx + feather * 0.4;
+      var css = 'radial-gradient(circle ' + radiusPx.toFixed(1) + 'px at ' +
+        xPct.toFixed(2) + '% ' + yPct.toFixed(2) + '%, transparent 0px, ' +
+        'transparent ' + inner.toFixed(1) + 'px, rgba(0,0,0,1) ' + outer.toFixed(1) + 'px)';
+      revealMask.style.webkitMaskImage = css;
+      revealMask.style.maskImage = css;
+    }
+
+    revealMask.style.opacity = '1';
+    setSpot(waypoints[0].x, waypoints[0].y, spotRadius);
+
+    function step(timestamp) {
+      if (!startTime) startTime = timestamp;
+      var elapsed = timestamp - startTime;
+
+      if (elapsed <= sweepDuration) {
+        var segCount = waypoints.length - 1;
+        var segDuration = sweepDuration / segCount;
+        var segIndex = Math.min(segCount - 1, Math.floor(elapsed / segDuration));
+        var segT = Math.min(1, (elapsed - segIndex * segDuration) / segDuration);
+        var a = waypoints[segIndex];
+        var b = waypoints[segIndex + 1];
+        var te = easeInOut(segT);
+        setSpot(a.x + (b.x - a.x) * te, a.y + (b.y - a.y) * te, spotRadius);
+        window.requestAnimationFrame(step);
+      } else if (elapsed <= totalDuration) {
+        var expandT = easeInOut(Math.min(1, (elapsed - sweepDuration) / expandDuration));
+        var last = waypoints[waypoints.length - 1];
+        var radius = spotRadius + (maxRadius - spotRadius) * expandT;
+        setSpot(last.x, last.y, radius);
+        window.requestAnimationFrame(step);
+      } else {
+        revealMask.style.opacity = '0';
+        revealMask.style.webkitMaskImage = '';
+        revealMask.style.maskImage = '';
+      }
+    }
+
+    window.requestAnimationFrame(step);
   }
 
   if (sessionStorage.getItem(SESSION_KEY) === 'true') {
