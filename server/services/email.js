@@ -8,7 +8,7 @@ if (!resendApiKey) {
 
 const resend = resendApiKey ? new Resend(resendApiKey) : null;
 
-const FROM_ADDRESS = 'Casa Juan <hello@casajuan.com>';
+const FROM_ADDRESS = 'Casa Juan <hello@casajuanexperience.com>';
 
 const INSTAGRAM_URL = 'https://instagram.com/casajuanexperience';
 const TIKTOK_URL = 'https://tiktok.com/@casajuanexperience';
