@@ -66,6 +66,7 @@ a {
   min-height: 48px;
   border: 1px solid transparent;
   cursor: pointer;
+  text-decoration: none;
   transition: opacity 0.2s ease, background 0.2s ease;
 }
 
@@ -446,6 +447,11 @@ body.age-gate-open {
 .momentum__follow a:hover {
   border-color: var(--champagne-gold);
   color: var(--champagne-gold);
+}
+
+.momentum__book-cta {
+  margin-top: 36px;
+  display: inline-flex;
 }
 
 /* ==========================================================================
