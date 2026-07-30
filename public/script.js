@@ -47,6 +47,19 @@
     site.removeAttribute('aria-hidden');
     document.body.classList.remove('age-gate-open');
     logEvent('page_load');
+    triggerCanReveal();
+  }
+
+  function triggerCanReveal() {
+    var revealMask = document.querySelector('.hero__can-reveal');
+    if (!revealMask) return;
+    // brief delay so the reveal feels sequential after the gate closes,
+    // rather than racing it
+    window.requestAnimationFrame(function () {
+      setTimeout(function () {
+        revealMask.classList.add('hero__can-reveal--active');
+      }, 150);
+    });
   }
 
   if (sessionStorage.getItem(SESSION_KEY) === 'true') {

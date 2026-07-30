@@ -215,9 +215,29 @@ body.age-gate-open {
 }
 
 .hero__can {
+  position: relative;
   margin: 40px 0 20px;
   width: min(220px, 40vw);
   filter: drop-shadow(0 30px 60px rgba(185, 154, 86, 0.12));
+}
+
+.hero__can-reveal {
+  position: absolute;
+  inset: 0;
+  background: var(--midnight-black);
+  clip-path: circle(150% at 50% 50%);
+  transition: clip-path 1.3s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.hero__can-reveal--active {
+  clip-path: circle(0% at 50% 50%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__can-reveal {
+    display: none;
+  }
 }
 
 .hero__flavor {
