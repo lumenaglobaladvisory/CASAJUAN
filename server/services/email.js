@@ -9,6 +9,7 @@ if (!resendApiKey) {
 const resend = resendApiKey ? new Resend(resendApiKey) : null;
 
 const FROM_ADDRESS = 'Casa Juan <hello@casajuanexperience.com>';
+const ADMIN_NOTIFICATION_EMAIL = process.env.ADMIN_NOTIFICATION_EMAIL || 'juan@casajuanexperience.com';
 
 const INSTAGRAM_URL = 'https://instagram.com/casajuanexperience';
 const TIKTOK_URL = 'https://tiktok.com/@casajuanexperience';
@@ -82,4 +83,56 @@ async function sendCampaign({ subject, bodyHtml, recipients }) {
   return results;
 }
 
-module.exports = { sendWelcomeEmail, sendCampaign };
+function bookingNotificationText(inquiry) {
+  return [
+    'New event inquiry from casajuanexperience.com',
+    '',
+    `Name: ${inquiry.name}`,
+    `Email: ${inquiry.email}`,
+    `Phone: ${inquiry.phone || 'Not provided'}`,
+    `Event type: ${inquiry.event_type || 'Not specified'}`,
+    `Event date: ${inquiry.event_date || 'Not specified'}`,
+    `Guest count: ${inquiry.guest_count || 'Not specified'}`,
+    `Location: ${inquiry.location || 'Not specified'}`,
+    '',
+    'Message:',
+    inquiry.message || '(none)'
+  ].join('\n');
+}
+
+async function sendBookingNotification(inquiry) {
+  if (!resend) return { skipped: true };
+  return resend.emails.send({
+    from: FROM_ADDRESS,
+    to: ADMIN_NOTIFICATION_EMAIL,
+    replyTo: inquiry.email,
+    subject: `New event inquiry: ${inquiry.name}${inquiry.event_date ? ' — ' + inquiry.event_date : ''}`,
+    text: bookingNotificationText(inquiry)
+  });
+}
+
+function bookingConfirmationText(name) {
+  return [
+    `${name},`,
+    '',
+    'Thank you for reaching out to Casa Juan.',
+    '',
+    'We have received your event details and will follow up shortly to confirm availability.',
+    '',
+    'Casa Juan',
+    'Fort Lauderdale, FL',
+    'Est. 2023'
+  ].join('\n');
+}
+
+async function sendBookingConfirmation(name, email) {
+  if (!resend) return { skipped: true };
+  return resend.emails.send({
+    from: FROM_ADDRESS,
+    to: email,
+    subject: 'Casa Juan received your event inquiry',
+    text: bookingConfirmationText(name)
+  });
+}
+
+module.exports = { sendWelcomeEmail, sendCampaign, sendBookingNotification, sendBookingConfirmation };

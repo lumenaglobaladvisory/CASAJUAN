@@ -5,6 +5,7 @@ const path = require('path');
 
 const subscribeRoutes = require('./routes/subscribe');
 const adminRoutes = require('./routes/admin');
+const bookRoutes = require('./routes/book');
 
 const app = express();
 
@@ -13,11 +14,16 @@ app.use(express.json());
 
 app.use('/api/admin', adminRoutes);
 app.use('/api', subscribeRoutes);
+app.use('/api', bookRoutes);
 
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
 app.get('/admin', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'admin.html'));
+});
+
+app.get('/book', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'book.html'));
 });
 
 app.get('/', (req, res) => {

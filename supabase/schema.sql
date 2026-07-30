@@ -35,3 +35,19 @@ CREATE TABLE events (
   metadata jsonb,
   created_at timestamp with time zone DEFAULT now()
 );
+
+CREATE TABLE event_inquiries (
+  id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+  name text NOT NULL,
+  email text NOT NULL,
+  phone text,
+  event_type text,
+  event_date date,
+  guest_count integer,
+  location text,
+  message text,
+  status text DEFAULT 'new',
+  created_at timestamp with time zone DEFAULT now()
+);
+
+CREATE INDEX idx_event_inquiries_created_at ON event_inquiries(created_at);

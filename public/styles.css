@@ -536,3 +536,113 @@ body.age-gate-open {
     width: auto;
   }
 }
+
+/* ==========================================================================
+   Book / Event Inquiry Page
+   ========================================================================== */
+
+.book-hero {
+  position: relative;
+  background: var(--midnight-black);
+  overflow: hidden;
+  padding: 96px 24px 80px;
+  text-align: center;
+}
+
+.book-hero__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.book-hero__wordmark {
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: var(--ivory);
+  font-size: clamp(2rem, 6vw, 3rem);
+  letter-spacing: 0.14em;
+}
+
+.book-hero__inner .rule {
+  margin-top: 20px;
+}
+
+.book-hero__inner .hero__subline {
+  margin-top: 16px;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--marble-gray);
+}
+
+.book-hero__headline {
+  margin-top: 40px;
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: var(--ivory);
+  font-size: clamp(2rem, 6vw, 2.75rem);
+}
+
+.book-hero__body {
+  margin-top: 20px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--marble-gray);
+}
+
+.book-hero__inner .btn {
+  margin-top: 36px;
+  display: inline-flex;
+}
+
+.form__textarea {
+  resize: vertical;
+  min-height: 96px;
+  font-family: var(--font-body);
+}
+
+.faq {
+  background: var(--ivory);
+  padding: 88px 24px;
+}
+
+.faq__inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.faq__headline {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.8rem, 5vw, 2.4rem);
+  color: var(--midnight-black);
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.faq__item {
+  padding: 28px 0;
+  border-top: 1px solid var(--marble-gray);
+}
+
+.faq__item:last-child {
+  border-bottom: 1px solid var(--marble-gray);
+}
+
+.faq__question {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--midnight-black);
+  margin-bottom: 10px;
+}
+
+.faq__answer {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: #4a4a4a;
+}
