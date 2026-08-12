@@ -667,3 +667,50 @@ body.age-gate-open {
   line-height: 1.7;
   color: #4a4a4a;
 }
+
+.faq__answer a {
+  color: var(--midnight-black);
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   Story / About Page
+   ========================================================================== */
+
+.story {
+  background: var(--ivory);
+  padding: 88px 24px;
+}
+
+.story__inner {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.story__inner p {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #3a3a3a;
+  margin-bottom: 28px;
+}
+
+.story__lede {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3.5vw, 1.75rem);
+  font-style: italic;
+  color: var(--midnight-black);
+  line-height: 1.5;
+  margin-bottom: 36px !important;
+}
+
+.story__quote {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 3.2vw, 1.6rem);
+  font-style: italic;
+  color: var(--brushed-brass);
+  text-align: center;
+  line-height: 1.5;
+  padding: 12px 0;
+  margin: 44px 0 !important;
+}
